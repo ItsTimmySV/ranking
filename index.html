@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,62 +14,57 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-    }h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.ranking-container {
-  width: 100%;
-  max-width: 600px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  padding: 20px;
-}
-
-.user-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 10px;
-  border-bottom: 1px solid #eee;
-}
-
-.user-card:last-child {
-  border-bottom: none;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-}
-
-.rank {
-  font-weight: bold;
-  font-size: 1.2em;
-  width: 30px;
-  text-align: center;
-  color: #555;
-}
-
-.name {
-  margin-left: 10px;
-  font-weight: 600;
-  color: #222;
-}
-
-.score {
-  font-size: 1em;
-  color: #333;
-}
-
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .ranking-container {
+      width: 100%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .user-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .user-card:last-child {
+      border-bottom: none;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+    .rank {
+      font-weight: bold;
+      font-size: 1.2em;
+      width: 30px;
+      text-align: center;
+      color: #555;
+    }
+    .name {
+      margin-left: 10px;
+      font-weight: 600;
+      color: #222;
+    }
+    .score {
+      font-size: 1em;
+      color: #333;
+    }
   </style>
 </head>
-<body>  <h1>🏆 Ranking Ugly Challenge 🏆</h1>
+<body>
+  <h1>🏆 Ranking Ugly Challenge 🏆</h1>
   <div class="ranking-container" id="ranking">
     <!-- Aquí se llenará el ranking dinámicamente -->
-  </div>  <script>
+  </div>
+  <script>
     // Datos de los ganadores
     const winners = [
       'Timmy',
@@ -98,15 +94,18 @@
       const userCard = document.createElement('div');
       userCard.className = 'user-card';
 
+      const retoText = user.wins === 1 ? 'Reto Ganado' : 'Retos Ganados';
+
       userCard.innerHTML = `
         <div class="user-info">
           <div class="rank">${index + 1}</div>
           <div class="name">${user.name}</div>
         </div>
-        <div class="score">${user.wins} Retos Ganados</div>
+        <div class="score">${user.wins} ${retoText}</div>
       `;
 
       rankingContainer.appendChild(userCard);
     });
-  </script></body>
+  </script>
+</body>
 </html>
