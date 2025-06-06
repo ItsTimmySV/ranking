@@ -58,24 +58,9 @@
   color: #222;
 }
 
-.badge {
-  background: #eee;
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 0.9em;
-  color: #555;
-}
-
 .score {
   font-size: 1em;
   color: #333;
-}
-
-.highlight {
-  background: #ffe08a;
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-weight: bold;
 }
 
   </style>
@@ -84,13 +69,28 @@
   <div class="ranking-container" id="ranking">
     <!-- Aquí se llenará el ranking dinámicamente -->
   </div>  <script>
-    const rankingData = [
-      { name: '@CarlosUgly', badge: '🔮 Oráculo Supremo', wins: 8 },
-      { name: '@SofiPredicts', badge: '🥷 Retador Imbatible', wins: 6 },
-      { name: '@MemoChallenge', badge: '🧠 Ugly Mastermind', wins: 5 },
-      { name: '@PaolaVisions', badge: '👁️ El Visionario', wins: 4 },
-      { name: '@LuisRisky', badge: '🎯 Rookie del Mes', wins: 3 }
+    // Datos de los ganadores
+    const winners = [
+      'Timmy',
+      'Cristobal Vasquez', // Empate no cuenta
+      'Cristian',
+      'Brian',
+      'Cristian'
     ];
+
+    // Contar las victorias
+    const winCounts = {};
+
+    winners.forEach(name => {
+      if (name !== 'Empate') {
+        winCounts[name] = (winCounts[name] || 0) + 1;
+      }
+    });
+
+    // Convertir a array para ordenar
+    const rankingData = Object.entries(winCounts)
+      .map(([name, wins]) => ({ name, wins }))
+      .sort((a, b) => b.wins - a.wins);
 
     const rankingContainer = document.getElementById('ranking');
 
@@ -103,13 +103,8 @@
           <div class="rank">${index + 1}</div>
           <div class="name">${user.name}</div>
         </div>
-        <div class="badge">${user.badge}</div>
         <div class="score">${user.wins} Retos Ganados</div>
       `;
-
-      if (index === 0) {
-        userCard.querySelector('.badge').classList.add('highlight');
-      }
 
       rankingContainer.appendChild(userCard);
     });
