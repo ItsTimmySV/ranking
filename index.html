@@ -33,6 +33,9 @@
       justify-content: space-between;
       padding: 15px 10px;
       border-bottom: 1px solid #eee;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
     }
     .user-card:last-child {
       border-bottom: none;
@@ -57,6 +60,13 @@
       font-size: 1em;
       color: #333;
     }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -65,16 +75,14 @@
     <!-- Aquí se llenará el ranking dinámicamente -->
   </div>
   <script>
-    // Datos de los ganadores
     const winners = [
       'Timmy',
-      'Cristobal Vasquez', // Empate no cuenta
+      'Cristobal Vasquez',
       'Cristian',
       'Brian',
       'Cristian'
     ];
 
-    // Contar las victorias
     const winCounts = {};
 
     winners.forEach(name => {
@@ -83,7 +91,6 @@
       }
     });
 
-    // Convertir a array para ordenar
     const rankingData = Object.entries(winCounts)
       .map(([name, wins]) => ({ name, wins }))
       .sort((a, b) => b.wins - a.wins);
@@ -93,6 +100,7 @@
     rankingData.forEach((user, index) => {
       const userCard = document.createElement('div');
       userCard.className = 'user-card';
+      userCard.style.animationDelay = `${index * 0.1}s`; // efecto en cascada
 
       const retoText = user.wins === 1 ? 'Reto Ganado' : 'Retos Ganados';
 
